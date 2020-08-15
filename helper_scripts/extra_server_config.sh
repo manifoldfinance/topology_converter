@@ -3,6 +3,10 @@
 echo "#################################"
 echo "  Running Extra_Server_Config.sh"
 echo "#################################"
+
+# cosmetic fix for dpkg-reconfigure: unable to re-open stdin: No file or directory during vagrant up
+export DEBIAN_FRONTEND=noninteractive
+
 sudo su
 
 useradd cumulus -m -s /bin/bash
