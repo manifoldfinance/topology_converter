@@ -744,9 +744,9 @@ folder to see how we set up the OOB server for you..''' + styles.ENDC)
 
             mgmt_switch_swp = 1
 
-            # Add Eth0 MGMT Link for every device that is is not oob-switch or oob-server
+            # Add Eth0 MGMT Link for every device that is is not oob-switch, oob-server or fake
             for device in inventory:
-                if inventory[device]["function"] == "oob-server" or inventory[device]["function"] == "oob-switch":
+                if inventory[device]["function"] in ["oob-server", "oob-switch", "fake"]:
                     continue
 
                 mgmt_switch_swp += 1
