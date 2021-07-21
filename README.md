@@ -36,7 +36,6 @@ PRs are actively welcomed.
 * Changed default value for vagrant interface attribute to eth0 for nodes running Cumulus Linux
 * Added node attribute to allow customization of the SSH user with the Auto Management Network feature
 * Added support for eth0 on fake nodes in conjunction with Auto Management Network feature
-* Updated CI validation
 
 ## Bugfixes
 * Added support for unmatched `'` or `"` characters in comments within a dot file
