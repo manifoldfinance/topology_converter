@@ -1,9 +1,9 @@
 # Created by Topology-Converter v{{ version }}
 #    Template Revision: v4.7.1
-#    https://github.com/cumulusnetworks/topology_converter
+#    https://gitlab.com/cumulus-consulting/tools/topology_converter
 #    using topology data from: {{ topology_file }}
 
-{% for function in ["oob-switch", "exit", "superspine", "leaf", "spine", "tor", "host"] %}
+{% for function in ["oob-switch", "exit", "superspine", "leaf", "spine", "tor", "host", "Unknown"] %}
 {%   for device in devices|selectattr("function", "equalto", function) %}
 {%     if loop.first %}
 [{{function}}]
