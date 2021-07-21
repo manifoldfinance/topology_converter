@@ -37,7 +37,6 @@ def lint_topo_file(topology_file):
             # Try to encode into ascii
             try:
                 line.encode('ascii', 'ignore')
-
             except UnicodeDecodeError as e:
                 msg = "Line %s:\n %s\n         --> \"%s\" \n" \
                     % (count, line, re.sub(r'[^\x00-\x7F]+', '?', line))
@@ -45,6 +44,9 @@ def lint_topo_file(topology_file):
                        "converted to ASCII cleanly. Try manually typing it instead of " + \
                        "copying and pasting."
                 raise tc_error.LintError(msg)
+
+            if line.lstrip().startswith('//') or line.lstrip().startswith('#'):
+                continue
 
             if line.count("\"") % 2 == 1:
                 msg = "Line %s: Has an odd number of quotation characters (\").\n" % count
