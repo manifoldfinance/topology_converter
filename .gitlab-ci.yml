@@ -1,5 +1,11 @@
-variables:
-  GIT_CLONE_PATH: $CI_BUILDS_DIR/$CI_PROJECT_NAME/$CI_CONCURRENT_ID
+image: python:3.8.10
+
+# variables:
+#   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+# cache:
+#   paths:
+#     - .cache/pip/
 
 stages:
   - providers
@@ -12,7 +18,11 @@ stages:
   - ansible
   - cleanup
 
-default:
+before_script:
+  - python --version
+  - pip install -r requirements.txt
+
+default_provider:
   stage: providers
   script:
     - cat ./examples/cldemo.dot
@@ -457,25 +467,11 @@ hostfile:
     - sed -i '/^ "leaf01" \[/c\ "leaf01" \[os="CumulusCommunity\/cumulus-vx" vagrant="eth0"\]' ./examples/cldemo.dot
     - sed -i '/^ "spine01" \[/c\ "spine01" \[os="CumulusCommunity\/cumulus-vx" vagrant="eth0"\]' ./examples/cldemo.dot
     - cat ./examples/cldemo.dot
-    - python3 ./topology_converter.py ./examples/cldemo.dot -p libvirt -a --prefix gitlab-runner_$CI_PIPELINE_ID
+    - python3 ./topology_converter.py ./examples/cldemo.dot -p libvirt -a
     - grep 'ansible.playbook = "./helper_scripts/empty_playbook.yml"' Vagrantfile
     - grep 'ansible.groups = {' Vagrantfile
     - ls helper_scripts/empty_playbook.yml
+    - cat helper_scripts/empty_playbook.yml
     - ls ansible.cfg
-    - vagrant --version
-    - vagrant plugin list
-    - vagrant up spine01 leaf01
-    - sleep 30
-    - ls .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
-    - ansible --version
-    - ansible -m ping spine01,leaf01
-  when: always
-
-libvirt cleanup:
-  stage: cleanup
-  script:
-    - virsh list --all | grep gitlab-runner_$CI_PIPELINE_ID | tr -s ' ' | cut -d ' ' -f3 | xargs -n 1 virsh destroy
-    - virsh list --all | grep gitlab-runner_$CI_PIPELINE_ID | tr -s ' ' | cut -d ' ' -f3 | xargs -n 1 virsh undefine
-    - virsh vol-list default | grep gitlab-runner_$CI_PIPELINE_ID | cut -d ' ' -f2 | xargs -n 1 virsh vol-delete --pool default
-    - vagrant global-status --prune
+    - cat ansible.cfg
   when: always
