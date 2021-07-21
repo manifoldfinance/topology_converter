@@ -243,6 +243,7 @@ Note: This list cannot be exhaustive because users can define new [passthrough a
 * custom_dns_servers -- (optional) Used with the [Automated Management Network](./auto_mgmt_network) feature.
 * ports -- (optional) (_libvirt only_) Used to specify a range of ports that should exist on the node in question. This option only works for devices in functional groups: oob-switch, exit,superspine,spine,leaf,ToR. Example: ports=32 would make sure that swp1-swp32 exist on the target device. This option does not support breakout ports at this time.
 * ssh_port -- (optional) Specify a port (greater than 1024) to be used for SSH to a specific node.
+* ssh_user -- (optional) Specify the username that should be used when connecting to the node via SSH from the oob-mgmt-server. This will generate a `.ssh/config` file on the `oob-mgmt-server`. Used with the [Automated Management Network](./auto_mgmt_network) feature.
 * vagrant_user -- (optional) Specifies which username vagrant will attempt to login to. MUST have Vagrant Insecure Key Added ahead of time!
 * vagrant -- (optional) This option controls the name of the vagrant interface which vagrant will use to communicate with the guest. The default name of the vagrant interface is set to "vagrant". When using this option it will be necessary to modify the config=./helper_script/xxx.sh" script to reflect the name that has been choosen.
 * legacy -- (optional) This value controls whether or not the hostname is set in the VM. Typically used when simulating with 2.5.x versions of Vx.
