@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='topology_converter', # Replace with your own username
-    version='4.7.1',
+    version='5.0.0',
     author='Eric Pulvino',
     author_email='eric@cumulusnetworks.com',
     description='Simulate a custom network topology directly on your laptop or on a dedicated server',
