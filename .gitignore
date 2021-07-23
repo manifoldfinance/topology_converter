@@ -3,6 +3,8 @@
 Vagrantfile*
 *.dot
 dhcp_mac_map
+ansible.cfg
 helper_scripts/auto_mgmt_network/*
+helper_scripts/empty_playbook.yml
 .DS_Store
 __pycache__
