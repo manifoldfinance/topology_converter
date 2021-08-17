@@ -1,6 +1,8 @@
 """
 The TcConfig module represents a configuration set needed for running Topology Converter
 """
+# pylint: disable=too-few-public-methods
+
 import os
 import sys
 

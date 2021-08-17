@@ -1,3 +1,5 @@
+""" Setup script """
+
 import setuptools
 
 with open('README.md', 'r') as fh:
@@ -7,8 +9,9 @@ setuptools.setup(
     name='topology_converter', # Replace with your own username
     version='5.0.0',
     author='Eric Pulvino',
-    author_email='eric@cumulusnetworks.com',
-    description='Simulate a custom network topology directly on your laptop or on a dedicated server',
+    author_email='epulvino@nvidia.com',
+    description='Simulate a custom network topology directly on your laptop \
+                 or on a dedicated server',
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
     url='https://gitlab.com/cumulus-consulting/tools/topology_converter',

@@ -1,6 +1,7 @@
 """
 Serves as a global logger that can be used to print messages at the end of a Topology Converter run.
 """
+# pylint: disable=print-function,no-self-use
 
 class WarningMessages:
     """

@@ -3,6 +3,6 @@ jinja2
 pydotplus
 ipaddress
 
-pylint=2.4.4
+pylint==2.4.4
 pylint-quotes
 git+https://gitlab.com/nwmitchell/pylint-print

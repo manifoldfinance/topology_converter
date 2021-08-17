@@ -11,22 +11,25 @@ static:
   stage: test
   before_script:
     - pip install semgrep
-  script: semgrep --error --config=p/r2c-ci .
+  script:
+    - semgrep --error --config=p/r2c-ci .
   only:
     changes:
       - "**/*.py"
   except:
     - tags
 
-# To be added, linting generates lots of warnings right now
-# lint:
-#   stage: test
-#   before_script:
-#     - pip install -r requirements-dev.txt
-#   script:
-#     - pylint *.py
-#   except:
-#     - tags
+lint:
+  stage: test
+  before_script:
+    - pip install -r requirements-dev.txt
+  script:
+    - pylint **/*.py
+  only:
+    changes:
+      - "**/*.py"
+  except:
+    - tags
 
 unit:
   stage: test

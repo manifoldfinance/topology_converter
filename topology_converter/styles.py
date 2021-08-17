@@ -1,6 +1,7 @@
 """
 Provides static variables for text colors
 """
+# pylint: disable=invalid-name,too-few-public-methods
 
 class styles:
     """

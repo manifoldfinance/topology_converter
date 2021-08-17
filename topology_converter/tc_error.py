@@ -1,6 +1,7 @@
 """
 Topology Converter-specific exceptions
 """
+# pylint: disable=print-function
 
 from .styles import styles
 
@@ -16,6 +17,7 @@ class TcError(Exception):
         return self.message
 
     def print_error(self):
+        """ Prints an error message with specified formatting """
         print(styles.FAIL + styles.BOLD + ' ### ERROR:', self.message + styles.ENDC)
 
 class RenderError(TcError):

@@ -1,6 +1,9 @@
 """
 Renderer module
 """
+# pylint: disable=print-function
+# pylint: disable=too-many-branches,too-many-locals,too-many-return-statements
+
 
 import os
 import pprint
@@ -18,7 +21,7 @@ class Renderer:
     """
     def __init__(self, config):
         self.config = config
-        vagrantfile_template = self.config.template_storage + "/Vagrantfile.j2"
+        vagrantfile_template = self.config.template_storage + '/Vagrantfile.j2'
         self.config.templates = [[vagrantfile_template, 'Vagrantfile']]
         self.epoch_time = str(int(time.time()))
 
@@ -26,27 +29,27 @@ class Renderer:
         """
         Prints the renderer's config datastructures
         """
-        pp = pprint.PrettyPrinter(depth=6)
-        print("\n\n######################################")
-        print("   DATASTRUCTURES SENT TO TEMPLATE:")
-        print("######################################\n")
-        print("provider=" + str(config.provider))
-        print("synced_folder=" + str(config.synced_folder))
-        print("version=" + str(config.version))
-        print("topology_file=" + str(config.topology_file))
-        print("arg_string=" + str(config.arg_string))
-        print("epoch_time=" + str(self.epoch_time))
-        print("script_storage=" + str(config.script_storage))
-        print("generate_ansible_hostfile=" + str(config.ansible_hostfile))
-        print("create_mgmt_device=" + str(config.create_mgmt_device))
-        print("function_group=")
+        pp = pprint.PrettyPrinter(depth=6) # pylint: disable=invalid-name
+        print('\n\n######################################')
+        print('   DATASTRUCTURES SENT TO TEMPLATE:')
+        print('######################################\n')
+        print('provider=' + str(config.provider))
+        print('synced_folder=' + str(config.synced_folder))
+        print('version=' + str(config.version))
+        print('topology_file=' + str(config.topology_file))
+        print('arg_string=' + str(config.arg_string))
+        print('epoch_time=' + str(self.epoch_time))
+        print('script_storage=' + str(config.script_storage))
+        print('generate_ansible_hostfile=' + str(config.ansible_hostfile))
+        print('create_mgmt_device=' + str(config.create_mgmt_device))
+        print('function_group=')
         pp.pprint(config.function_group)
-        print("network_functions=")
+        print('network_functions=')
         pp.pprint(config.network_functions)
-        print("devices=")
+        print('devices=')
         pp.pprint(devices)
 
-    def render_jinja_templates(self, devices, write_files=True):
+    def render_jinja_templates(self, devices, write_files=True): # pylint: disable=inconsistent-return-statements
         """
         Renders Jinja2 templates. Some templates require the devices list to be in a certain order.
         Therefore, you should build the device list via Renderer.populate_data_structures()
@@ -65,12 +68,12 @@ class Renderer:
             return
 
         if self.config.verbose > 2:
-            print("RENDERING JINJA TEMPLATES...")
+            print('RENDERING JINJA TEMPLATES...')
 
         # Render the MGMT Network stuff
         if self.config.create_mgmt_device:
             # Check that MGMT Template Dir exists
-            mgmt_template_dir = self.config.template_storage + "/auto_mgmt_network/"
+            mgmt_template_dir = self.config.template_storage + '/auto_mgmt_network/'
             if not os.path.isdir(mgmt_template_dir):
                 raise RenderError('ERROR: ' + str(mgmt_template_dir) + \
                                   ' does not exist. Cannot populate templates!')
@@ -80,18 +83,18 @@ class Renderer:
 
             for file in os.listdir(mgmt_template_dir):
 
-                if file.endswith(".j2"):
+                if file.endswith('.j2'):
                     mgmt_templates.append(file)
 
             if self.config.verbose > 2:
-                print(" mgmt_template_dir: {}".format(mgmt_template_dir))
-                print(" detected mgmt_templates:")
+                print(' mgmt_template_dir: {}'.format(mgmt_template_dir))
+                print(' detected mgmt_templates:')
                 print(mgmt_templates)
 
             # Create output location for MGMT template files
             if write_files and not os.path.isdir(self.config.mgmt_destination_dir):
                 if self.config.verbose > 2:
-                    print("Making Directory for MGMT Helper Files: " + \
+                    print('Making Directory for MGMT Helper Files: ' + \
                           self.config.mgmt_destination_dir)
 
                 try:
@@ -122,7 +125,7 @@ class Renderer:
         for templatefile, destination in self.config.templates:
 
             if self.config.verbose > 2:
-                print("    Rendering: " + templatefile + " --> " + destination)
+                print('    Rendering: ' + templatefile + ' --> ' + destination)
 
             template = jinja2.Template(open(templatefile).read())
 
@@ -178,7 +181,7 @@ class Renderer:
         list - Clean data structure
         """
         # Sort the devices by function
-        devices.sort(key=getKeyDevices)
+        devices.sort(key=get_key_devices)
         for device in devices:
             device['interfaces'] = sorted_interfaces(device['interfaces'])
 
@@ -186,27 +189,27 @@ class Renderer:
             return devices
         for device in devices:
             if self.config.verbose > 0:
-                print(styles.GREEN + styles.BOLD + ">> DEVICE: " + device['hostname'] + styles.ENDC)
-                print("     code: " + device['os'])
+                print(styles.GREEN + styles.BOLD + '>> DEVICE: ' + device['hostname'] + styles.ENDC)
+                print('     code: ' + device['os'])
 
                 if 'memory' in device:
-                    print("     memory: " + device['memory'])
+                    print('     memory: ' + device['memory'])
 
                 for attribute in device:
-                    if attribute == 'memory' or attribute == 'os' or attribute == 'interfaces':
+                    if attribute in ('memory', 'os', 'interfaces'):
                         continue
-                    print("     " + str(attribute) + ": " + str(device[attribute]))
+                    print('     ' + str(attribute) + ': ' + str(device[attribute]))
 
             if self.config.verbose > 1:
                 for interface_entry in device['interfaces']:
-                    print("       LINK: " + interface_entry["local_interface"])
+                    print('       LINK: ' + interface_entry['local_interface'])
                     for attribute in interface_entry:
-                        if attribute != "local_interface":
-                            print("               " + attribute + ": " + interface_entry[attribute])
+                        if attribute != 'local_interface':
+                            print('               ' + attribute + ': ' + interface_entry[attribute])
 
         # Remove Fake Devices
         indexes_to_remove = []
-        for i in range(0, len(devices)):
+        for i in range(0, len(devices)): # pylint: disable=consider-using-enumerate
             if 'function' in devices[i]:
                 if devices[i]['function'] == 'fake':
                     indexes_to_remove.append(i)
@@ -233,35 +236,35 @@ def sorted_interfaces(interface_dictionary):
     sorted_list.sort(key=natural_sort_key)
 
     for link in sorted_list:
-        interface_dictionary[link]["local_interface"] = link
+        interface_dictionary[link]['local_interface'] = link
         interface_list.append(interface_dictionary[link])
 
     return interface_list
 
-def getKeyDevices(device):
+def get_key_devices(device):
     """ Used to order the devices for printing into the vagrantfile """
-    if device['function'] == "oob-server":
+    if device['function'] == 'oob-server':
         return 1
-    elif device['function'] == "oob-switch":
+    if device['function'] == 'oob-switch':
         return 2
-    elif device['function'] == "exit":
+    if device['function'] == 'exit':
         return 3
-    elif device['function'] == "superspine":
+    if device['function'] == 'superspine':
         return 4
-    elif device['function'] == "spine":
+    if device['function'] == 'spine':
         return 5
-    elif device['function'] == "leaf":
+    if device['function'] == 'leaf':
         return 6
-    elif device['function'] == "tor":
+    if device['function'] == 'tor':
         return 7
-    elif device['function'] == "host":
+    if device['function'] == 'host':
         return 8
-    else:
-        return 9
+    return 9
 
-def natural_sort_key(s):
+def natural_sort_key(key):
     """ Sort function for sorting interface lists """
     _nsre = re.compile('([0-9]+)')
-    if s == 'eth0': return ['A',0,'']
+    if key == 'eth0':
+        return ['A', 0, '']
     return [int(text) if text.isdigit() else text.lower()
-            for text in re.split(_nsre, s)]
+            for text in re.split(_nsre, key)]
