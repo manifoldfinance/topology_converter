@@ -455,13 +455,10 @@ def parse_topology(topology_file, config, dot_data=None):
 
     # Add All the Edges to Inventory
     net_number = 1
+    port_a = str(config.start_port + net_number)
+    port_b = str(config.start_port + config.port_gap + net_number)
     for edge in edges:
-        # if provider == "virtualbox":
         network_string = 'net' + str(net_number)
-
-        # elif provider == "libvirt":
-        port_a = str(config.start_port + net_number)
-        port_b = str(config.start_port + config.port_gap + net_number)
 
         # Set Devices/interfaces/MAC Addresses
         left_device = edge.get_source().split(':')[0].replace('"', '')
@@ -571,6 +568,8 @@ def parse_topology(topology_file, config, dot_data=None):
                 # edge_attributes[attribute]=value
 
         net_number += 1
+        port_a = str(config.start_port + net_number)
+        port_b = str(config.start_port + config.port_gap + net_number)
 
     # Remove PXEbootinterface attribute from hosts which are not set to PXEboot=True
     for device in inventory:
