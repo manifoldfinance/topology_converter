@@ -32,6 +32,12 @@ PRs are actively welcomed.
 
 3. Submit a PR on the **Development Branch**
 
+## New Features in v5.0.1
+* Added support for topology files without any defined links
+
+## Bugfixes
+* Cosmetic fix for dpkg-reconfigure error during node bringup if using the `extra_server_config.sh` script
+
 ## New Features in v5.0.0
 * Changed default value for vagrant interface attribute to eth0 for nodes running Cumulus Linux
 * Added node attribute to allow customization of the SSH user with the Auto Management Network feature
@@ -42,6 +48,7 @@ PRs are actively welcomed.
 * Updated CI validation
 
 ## Changelog:
+* v5\.0\.1 2021\_10\_25:  Added support for topology files without any defined links.
 * v5\.0\.0 2021\_07\_21:  Refactored code structure. Changed default value for vagrant interface attribute for Cumulus Linux. Added support for eth0 on fake nodes in conjunction with Auto Management Network feature. Updated CI validation.
 * v4\.7\.1 2019\_11\_13:  Improved relative pathing behavior for Helper Scripts and templates. Added CPU support to control the number of CPUs in a VM. Added per device SSH username specification from OOB-mgmt-server using the `-c` workflow. Added support for SSH Key forwarding using the `-c` workflow (Issue #134). Added Default route handout as new default for oob-mgmt-server dhcp for the `-c` workflow. Added Support for simulation of 4.x+ Cumulus Vx Devices. Added proper CI validation. Fix for bad shell for new users with `-c` workflow (Issue #130). Using cumulus-ztp as ztp script name instead of ztp_oob.sh for `-c` workflow (Issue #131). Fixed oob-mgmt-server software install of openssl for the `-c` workflow (Issue #132). Added paramiko to oob-mgmt-server for the `-c` workflow (Issue #133). Improved error handling around mgmt_ip specification for `-c` workflow (Issue #136). Enhanced docs around 'functional defaults' (Issue #137 and 9d19bb38c90bfa4e15d6b2649b07bd1781aee28b)
 * v4\.7\.0 2019\_06\_07: Added Support for Python3. Added the -i option for libvirt simulations instead of controlling ports. Updated the -c workflow to use an OOB-mgmt-server based on Ubuntu 18.04.Updated the Host functional default to use Ubuntu 18.04. Less verbose default output, (regain full verbosity with -vvv). Added support for the ZTP node attribute to specify ZTP for initial config. Improved relative pathing behavior for helper scripts. Fix for Issue #123. Reverted change from dc23e3c which broke older libvirt hosts.

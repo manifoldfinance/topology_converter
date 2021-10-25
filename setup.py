@@ -7,9 +7,11 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='topology_converter', # Replace with your own username
-    version='5.0.0',
+    version='5.0.1',
     author='Eric Pulvino',
     author_email='epulvino@nvidia.com',
+    maintainer='Nick Mitchell',
+    maintainer_email='nmitchell@nvidia.com',
     description='Simulate a custom network topology directly on your laptop \
                  or on a dedicated server',
     long_description=LONG_DESCRIPTION,
