@@ -1,6 +1,7 @@
 *~
 .vagrant/
 Vagrantfile*
+.vscode/
 *.dot
 dhcp_mac_map
 ansible.cfg
