@@ -18,3 +18,5 @@ if [ $(grep -c '10.20.30' helper_scripts/auto_mgmt_network/hosts) -ne 16 ]; then
     exit 1
 fi
 grep 'fixed-address 10.20.30.250; option host-name "leaf01"' helper_scripts/auto_mgmt_network/dhcpd.hosts
+grep 'cumulus-ztp' helper_scripts/auto_mgmt_network/dhcpd.hosts
+grep 'cumulus-ztp' helper_scripts/auto_mgmt_network/dhcpd.conf

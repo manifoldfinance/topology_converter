@@ -48,6 +48,7 @@ class TcConfig:
         self.tunnel_ip = clean_kwargs.get('tunnel_ip', None)
         self.topology_file = clean_kwargs.get('topology_file', '')
         self.total_memory = clean_kwargs.get('total_memory', 0)
+        self.use_ztp = clean_kwargs.get('use_ztp', True)
         self.vagrant = clean_kwargs.get('vagrant', 'eth0')
         self.verbose = clean_kwargs.get('verbose', 0)
         self.version = clean_kwargs.get('version', '')
