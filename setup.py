@@ -7,7 +7,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='topology_converter', # Replace with your own username
-    version='5.0.1',
+    version='5.0.2',
     author='Eric Pulvino',
     author_email='epulvino@nvidia.com',
     maintainer='Nick Mitchell',
