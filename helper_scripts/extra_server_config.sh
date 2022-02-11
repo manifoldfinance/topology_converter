@@ -14,6 +14,11 @@ echo "cumulus:CumulusLinux!" | chpasswd
 usermod -aG sudo cumulus
 echo -e "cumulus ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/20_cumulus
 
+SSH_URL="http://192.168.200.254/authorized_keys"
+#Setup SSH key authentication for Ansible
+mkdir -p /home/cumulus/.ssh
+wget -O /home/cumulus/.ssh/authorized_keys $SSH_URL
+
 #Test for Debian-Based Host
 which apt &> /dev/null
 if [ "$?" == "0" ]; then
