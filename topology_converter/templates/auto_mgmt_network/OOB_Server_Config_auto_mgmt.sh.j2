@@ -89,30 +89,23 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update -y
 
 echo " ### Installing Packages... ###"
-apt-get install -y htop isc-dhcp-server tree apache2 git python-pip dnsmasq apt-cacher-ng lldpd ntp ifupdown2
+apt-get install -y htop isc-dhcp-server tree apache2 git python3-pip dnsmasq apt-cacher-ng lldpd ntp
 
-echo " ### Overwriting /etc/network/interfaces ###"
-cat <<EOT > /etc/network/interfaces
-auto lo
-iface lo inet loopback
-
-{% if devices[0].vagrant is defined %}
-auto {{ devices[0].vagrant }}
-iface {{ devices[0].vagrant }} inet dhcp
-{% else %}
-auto vagrant
-iface vagrant inet dhcp
-{% endif %}
-
-auto eth1
-iface eth1 inet static
-    address {{ devices[0].mgmt_ip }}{{ devices[0].mgmt_cidrmask }}
+echo " ### Creating /etc/netplan/33-topology-converter ###"
+cat <<EOT > /etc/netplan/33-topology-converter.yaml
+network:
+  ethernets:
+    {% if devices[0].vagrant is defined %}{{ devices[0].vagrant }}{% else %}vagrant{% endif %}:
+      dhcp4: true
+    eth1:
+      dhcp4: no
+      addresses: [{{ devices[0].mgmt_ip }}{{ devices[0].mgmt_cidrmask }}]
 EOT
 
 # We don't apply config here because interfaces have not been remapped.
 #    The subsequent reboot will apply the configuration above anyways.
-#echo " ### Applying Network Configuration via IFUPDOWN2... ###"
-#/sbin/ifreload -a
+#echo " ### Applying Network Configuration... ###"
+#netplan apply
 
 if [ $puppet -eq 1 ]; then
     echo " ### Installing Puppet ### "

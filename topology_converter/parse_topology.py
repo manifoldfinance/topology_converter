@@ -367,7 +367,7 @@ def parse_topology(topology_file, config, dot_data=None):
                 inventory[node_name]['memory'] = '1'
 
             if value == 'oob-server':
-                inventory[node_name]['os'] = 'generic/ubuntu1804'
+                inventory[node_name]['os'] = 'generic/ubuntu2004'
                 inventory[node_name]['memory'] = '1024'
 
             if value == 'oob-switch':
