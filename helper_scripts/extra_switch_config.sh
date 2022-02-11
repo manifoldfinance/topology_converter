@@ -23,6 +23,13 @@ EOT
 #add line to support bonding inside virtualbox VMs
 #sed -i '/.*iface swp.*/a\    #required for traffic to flow on Bonds in Vbox VMs\n    post-up ip link set $IFACE promisc on' /etc/network/interfaces
 
+# Uncomment to unexpire and change the default cumulus user password
+# passwd -x 99999 cumulus
+# echo 'cumulus:CumulusLinux!' | chpasswd
+
+# Uncomment to give cumulus user passwordless sudo
+# echo "cumulus ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10_cumulus
+
 echo "#################################"
 echo "   Finished"
 echo "#################################"

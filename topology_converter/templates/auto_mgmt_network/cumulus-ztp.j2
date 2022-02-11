@@ -12,7 +12,12 @@ SSH_URL="http://{{ devices[0].mgmt_ip }}/authorized_keys"
 mkdir -p /home/cumulus/.ssh
 wget -O /home/cumulus/.ssh/authorized_keys $SSH_URL
 
-echo "cumulus ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10_cumulus
+# Uncomment to unexpire and change the default cumulus user password
+# passwd -x 99999 cumulus
+# echo 'cumulus:CumulusLinux!' | chpasswd
+
+# Uncomment to give cumulus user passwordless sudo
+# echo "cumulus ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10_cumulus
 
 reboot
 exit 0
