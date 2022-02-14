@@ -680,10 +680,10 @@ def parse_topology(topology_file, config, dot_data=None):
             raise tc_error.TcError(msg)
 
         if 'os' not in inventory[mgmt_server]:
-            inventory[mgmt_server]['os'] = 'generic/ubuntu1804'
+            inventory[mgmt_server]['os'] = 'generic/ubuntu2004'
 
         if 'memory' not in inventory[mgmt_server]:
-            inventory[mgmt_server]['memory'] = '512'
+            inventory[mgmt_server]['memory'] = '1024'
 
         if 'config' in inventory[mgmt_server]:
             print(styles.FAIL + styles.BOLD + '''
