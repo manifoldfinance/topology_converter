@@ -56,7 +56,7 @@ function setup_ztp(){
 function disable_remap(){
     echo "### Disabling default remap on Cumulus VX..."
     if [ -f /etc/hw_init.d/S10rename_eth_swp.sh ]; then
-        mv /etc/hw_init.d/S10rename_eth_swp.sh /etc/hw_init.d/S10rename_eth_swp.sh.backup
+        chmod -x /etc/hw_init.d/S10rename_eth_swp.sh
     fi
 }
 
