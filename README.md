@@ -62,6 +62,7 @@ PRs are actively welcomed.
 * Updated CI validation
 
 ## Changelog:
+* v5\.0\.3 2022\_03\_10: Fix for #153
 * v5\.0\.2 2022\_02\_11: Fixes for #138, #140, #151, #152, !164
 * v5\.0\.1 2021\_10\_25: Added support for topology files without any defined links.
 * v5\.0\.0 2021\_07\_21: Refactored code structure. Changed default value for vagrant interface attribute for Cumulus Linux. Added support for eth0 on fake nodes in conjunction with Auto Management Network feature. Updated CI validation.
