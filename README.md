@@ -32,6 +32,11 @@ PRs are actively welcomed.
 
 3. Submit a PR on the **Development Branch**
 
+## New Features in v5.0.3
+
+## Bugfixes
+* #153: Interface missing and wrongly numbered switchports in Cumulus Linux 5.x versions
+
 ## New Features in v5.0.2
 
 ## Bugfixes
